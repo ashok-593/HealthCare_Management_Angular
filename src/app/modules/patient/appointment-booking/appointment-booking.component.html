@@ -1,0 +1,27 @@
+<div class="appointment-container">
+  <h2>Book an Appointment</h2>
+  <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+      <label>Doctor:</label>
+      <select formControlName="doctorId" (change)="onDoctorChange($event)">
+          <option *ngFor="let doctor of doctors" [value]="doctor.doctorId">
+              {{ doctor.name }}
+          </option>
+      </select>
+
+      <label>Appointment Date:</label>
+      <select formControlName="appointmentDate" (change)="onDateChange($event)">
+          <option *ngFor="let date of availableDates" [value]="date">
+              {{ date }}
+          </option>
+      </select>
+
+      <label>Time Slot:</label>
+      <select formControlName="timeSlot">
+          <option *ngFor="let slot of timeSlots" [value]="slot">
+              {{ slot }}
+          </option>
+      </select>
+
+      <button type="submit" [disabled]="bookingForm.invalid">Book Appointment</button>
+  </form>
+</div>

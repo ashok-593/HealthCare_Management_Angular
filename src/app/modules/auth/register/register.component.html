@@ -1,0 +1,41 @@
+<div class="register-container">
+    <h2>Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <label>Name:</label>
+      <input type="text" formControlName="name" placeholder="Enter full name">
+      <div *ngIf="registerForm.controls['name'].invalid && registerForm.controls['name'].touched">
+        <small>Name is required.</small>
+      </div>
+  
+      <label>Email:</label>
+      <input type="email" formControlName="email" placeholder="Enter email">
+      <div *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+        <small>Email is required and should be valid.</small>
+      </div>
+
+      <label>Phone Number:</label>
+      <input type="text" formControlName="phone" placeholder="Enter Phone Number">
+      <div *ngIf="registerForm.controls['phone'].invalid && registerForm.controls['phone'].touched">
+        <small>phone Number must be 10 Charecters.</small>
+      </div>
+
+
+  
+      <label>Password:</label>
+      <input type="password" formControlName="password" placeholder="Enter password">
+      <div *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+        <small>Password must be at least 8 characters.</small>
+      </div>
+  
+      <label>Role:</label>
+      <select formControlName="role">
+        <option value="PATIENT">Patient</option>
+        <option value="DOCTOR">Doctor</option>
+      </select>
+  
+      <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    </form>
+  
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    <p>Already have an account? <a routerLink="/auth/login">Login</a></p>
+  </div>

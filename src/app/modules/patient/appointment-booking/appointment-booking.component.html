@@ -1,6 +1,10 @@
 <div class="appointment-container">
   <h2>Book an Appointment</h2>
   <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+
+        <!-- <label >PatientId:</label>
+        <input type="text" [disabled] placeholder="{{userId}}"> -->
+        
       <label>Doctor:</label>
       <select formControlName="doctorId" (change)="onDoctorChange($event)">
           <option *ngFor="let doctor of doctors" [value]="doctor.doctorId">

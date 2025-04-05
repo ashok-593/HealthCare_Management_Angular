@@ -1,28 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AppointmentService } from '../../shared/services/appointment.service';
 import { DoctorAvailabilityService } from '../../shared/services/doctor-availability.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { isPlatformBrowser } from '@angular/common';
+
+interface Doctor {
+  doctorId: number;
+  name: string;
+  // Add other relevant fields
+}
+
+interface Availability {
+  availableDate: string;
+  timeSlots: string[];
+}
 
 @Component({
   selector: 'app-appointment-booking',
-  imports: [CommonModule , ReactiveFormsModule , HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './appointment-booking.component.html',
   styleUrls: ['./appointment-booking.component.css']
 })
 export class AppointmentBookingComponent implements OnInit {
   bookingForm: FormGroup;
-  doctors: any[] = [];
+  doctors: Doctor[] = [];
   availableDates: string[] = [];
   timeSlots: string[] = [];
+  patientid: number | null = null;
 
   constructor(
     private fb: FormBuilder,
     private appointmentService: AppointmentService,
     private availabilityService: DoctorAvailabilityService,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.bookingForm = this.fb.group({
       doctorId: ['', Validators.required],
@@ -32,13 +46,26 @@ export class AppointmentBookingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadDoctors();
+    if (isPlatformBrowser(this.platformId)) {
+      const userId = localStorage.getItem('user_id');
+      const jwt = localStorage.getItem('access_token');
+
+      console.log("user id while booking:", userId);
+      console.log("jwt token while booking:", jwt);
+
+      if (userId && jwt) {
+        this.patientid = +userId;
+        this.loadDoctors();
+      } else {
+        console.error('User ID or JWT token not found in local storage.');
+      }
+    }
   }
 
   loadDoctors() {
     this.availabilityService.getDoctors().subscribe(
-      response => this.doctors = response,
-      err => console.error(err)
+      (response: Doctor[]) => this.doctors = response,
+      err => console.error('Error loading doctors:', err)
     );
   }
 
@@ -49,10 +76,10 @@ export class AppointmentBookingComponent implements OnInit {
 
   loadAvailableDates(doctorId: number) {
     this.availabilityService.getAvailableDates(doctorId).subscribe(
-      response => {
-        this.availableDates = response.map((availability: any) => availability.availableDate);
+      (response: Availability[]) => {
+        this.availableDates = response.map(availability => availability.availableDate);
       },
-      err => console.error(err)
+      err => console.error('Error loading available dates:', err)
     );
   }
 
@@ -64,19 +91,31 @@ export class AppointmentBookingComponent implements OnInit {
 
   loadTimeSlots(doctorId: number, selectedDate: string) {
     this.availabilityService.getAvailableDates(doctorId).subscribe(
-      response => {
-        const availability = response.find((avail: any) => avail.availableDate === selectedDate);
+      (response: Availability[]) => {
+        const availability = response.find(avail => avail.availableDate === selectedDate);
         this.timeSlots = availability ? availability.timeSlots : [];
       },
-      err => console.error(err)
+      err => console.error('Error loading time slots:', err)
     );
   }
 
   onSubmit() {
-    if (this.bookingForm.valid) {
-      this.appointmentService.bookAppointment(this.bookingForm.value).subscribe(
-        () => this.router.navigate(['/patient/dashboard']),
-        err => console.error(err)
+    if (this.bookingForm.valid && this.patientid !== null) {
+      const formData = {
+        ...this.bookingForm.value,
+        patientId: this.patientid
+      };
+      console.log("Form data being sent:", formData);
+
+      this.appointmentService.bookAppointment(formData).subscribe(
+        (response) => {
+          alert(response+"Appointment booked successfully");
+          this.router.navigate(['/patient/dashboard']);
+        },
+        err => {console.error('Error booking appointment:', err);
+          console.error("Form data being sent:", formData);
+        }
+
       );
     }
   }

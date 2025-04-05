@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { text } from 'stream/consumers';
 
-const apiUrl = 'http://localhost:8082/api/patient/book';
+
  
- 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentService {
+
+  private  apiUrl = 'http://localhost:8082/api';
  
   constructor(private http: HttpClient) {}
  
@@ -17,8 +20,17 @@ export class AppointmentService {
   // }
  
  
-  bookAppointment(data: any): Observable<any> {
-    return this.http.post(`${apiUrl}/appointments/book`, data);
+  
+  bookAppointment(appointmentData: any): Observable<any> {
+    const jwt = localStorage.getItem('access_token');
+    console.log("jwt token book appointment method",jwt);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${jwt}`
+    });
+
+    console.log(headers);
+
+    return this.http.post(`${this.apiUrl}/appointments/book`, appointmentData, { headers, responseType: 'text' });
   }
 }
  

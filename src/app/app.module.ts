@@ -9,6 +9,8 @@ import { RegisterComponent } from './modules/auth/register/register.component';
 import { PatientDashboardComponent } from './modules/patient/dashboard/dashboard.component';
 import { DoctorDashboardComponent } from './modules/doctor/dashboard/dashboard.component';
 import { AppointmentBookingComponent } from './modules/patient/appointment-booking/appointment-booking.component';
+import { HeaderComponent } from './modules/header/header.component';
+
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -17,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     RegisterComponent,
     PatientDashboardComponent,
-    DoctorDashboardComponent
+    DoctorDashboardComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

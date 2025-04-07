@@ -6,7 +6,7 @@
    
   .card {
     flex: 1;
-    background-color: #e3f2fd;
+    background-color: #1a6397;
     padding: 16px;
     border-radius: 12px;
     text-align: center;
@@ -30,7 +30,51 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
    
-  /* Modal Styles */
+  .card-container {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+   
+  .card {
+    flex: 1;
+    background-color: #e3f2fd;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+   
+  .appointments-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+   
+  .appointment-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 16px;
+    border-radius: 8px;
+    width: 250px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .appointment-card button{
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #478dd8;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+   
   .modal-backdrop {
     position: fixed;
     top: 0;
@@ -43,12 +87,80 @@
     align-items: center;
     z-index: 1000;
   }
-   
+  
   .modal-content {
     background-color: white;
     padding: 24px;
     border-radius: 12px;
     max-width: 500px;
     width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
   }
+  
+  .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  
+  .consultation-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-content h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .modal-content button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .modal-content button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .modal-content {
+      padding: 15px;
+    }
+  
+    .consultation-card {
+      padding: 10px;
+    }
+  
+    .modal-content button {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
+  
+  @media (max-width: 580px) {
+    .modal-content {
+      padding: 10px;
+    }
+  
+    .consultation-card {
+      padding: 8px;
+    }
+  
+    .modal-content button {
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+  }
+  

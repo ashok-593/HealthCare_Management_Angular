@@ -1,0 +1,34 @@
+
+  <div class="appointment-container">
+    <h2>Update Appointment</h2>
+    <form [formGroup]="updatingForm" (ngSubmit)="onUpdate()">
+        
+        <label>AppointmentId:</label>
+        <input type="number" [value]="appointment?.appointmentId" [disabled]="true"  placeholder="${{appointment?.appointmentId}}">
+  
+
+        <label>Doctor:</label>
+        <select formControlName="doctorId" [disabled]="true">
+          <option  [value]="appointment?.doctorId">
+            {{ appointment?.doctorName }}
+          </option>
+        </select>
+  
+        <label>Appointment Date:</label>
+        <select formControlName="appointmentDate" (change)="onDateChange($event)">
+            <option *ngFor="let date of availableDates" [value]="date">
+                {{ date }}
+            </option>
+        </select>
+  
+        <label>Time Slot:</label>
+        <select formControlName="timeSlot">
+            <option *ngFor="let slot of timeSlots" [value]="slot">
+                {{ slot }}
+            </option>
+        </select>
+  
+        <button type="submit" [disabled]="updatingForm.invalid">Update Appointment</button>
+    </form>
+  </div>
+  

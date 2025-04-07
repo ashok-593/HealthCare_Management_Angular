@@ -15,6 +15,21 @@ interface AppointmentDAO {
   appointmentStatus: string;
 }
 
+interface ConsultationDAO{
+  appointmentId: number;
+  consultationId: number;
+  patientId: number;
+  patientName: string;
+  doctorId: number;
+  doctorName: string;
+  appointmentDate: string;
+  timeSlot: string;
+  notes: string;
+  prescription: string;
+
+
+}
+
 @Component({
   selector: 'app-patient-dashboard',
   imports: [CommonModule],
@@ -24,9 +39,13 @@ interface AppointmentDAO {
 export class PatientDashboardComponent implements OnInit {
   upcomingAppointments: AppointmentDAO[] = [];
   pastAppointments: AppointmentDAO[] = [];
-  showConsultationModal = false;
-  selectedConsultation: any = null;
   patientid: number | null = null;
+  consultations : ConsultationDAO[]=[];
+  selectedConsultation: ConsultationDAO | null=null ;
+  showConsultationModal = false;
+  showMedicalHistoryModal = false;
+
+
 
   constructor(
     private appointmentService: AppointmentService,
@@ -47,6 +66,7 @@ export class PatientDashboardComponent implements OnInit {
         this.patientid = +userId;
         this.fetchUpcomingAppointments();
         this.fetchPastAppointments();
+        this.loadConsultations();
       } else {
         console.error('User ID or JWT token not found in local storage.');
       }
@@ -80,6 +100,37 @@ export class PatientDashboardComponent implements OnInit {
     }
   }
 
+  loadConsultations() {
+   
+    if (this.patientid !== null) {
+      const patientId = this.patientid;
+      this.consultationService.getConsultations(patientId).subscribe(
+        (response: ConsultationDAO[]) => {
+          this.consultations = response;
+        },
+        err => console.error('Error loading consultations:', err)
+      );
+    } else {
+      console.error('Patient ID not found in local storage.');
+    }
+  }
+  
+  
+  openConsultation(consultation: ConsultationDAO) {
+    this.selectedConsultation = consultation;
+    this.showConsultationModal = true;
+  }
+
+  viewMedicalHistory() {
+    this.showMedicalHistoryModal = true;
+  }
+
+  closeModal() {
+    this.showConsultationModal = false;
+    this.showMedicalHistoryModal = false;
+  }
+
+
   viewConsultation(appointmentId: number) {
     this.consultationService.getConsultationByAppointmentId(appointmentId).subscribe(data => {
       this.selectedConsultation = data;
@@ -87,31 +138,47 @@ export class PatientDashboardComponent implements OnInit {
     });
   }
 
-  closeModal() {
-    this.showConsultationModal = false;
-    this.selectedConsultation = null;
-  }
 
   bookAppointment() {
     this.router.navigate(['patient/appointments/book']);
   }
-  viewAvailability() {
-    // Implement viewAvailability logic
-    console.log('Viewing doctor availability');
-  }
 
-  viewMedicalHistory() {
-    // Implement viewMedicalHistory logic
-    console.log('Viewing medical history');
-  }
 
-  updateAppointment(appointmentId: number) {
+  // viewMedicalHistory() {
+  //   // Implement viewMedicalHistory logic
+  //   console.log('Viewing medical history');
+  // }
+
+  updateAppointment(appointmentId: number, doctorId: number) {
     // Implement updateAppointment logic
     console.log(`Updating appointment with ID: ${appointmentId}`);
+    console.log(`Updating appointment with doctor ID: ${doctorId}`); 
+    
+    this.appointmentService.setAppointmentId(appointmentId);
+    this.appointmentService.setDoctorId(doctorId);
+
+    this.router.navigate(['patient/appointments/update']);
+
   }
 
   cancelAppointment(appointmentId: number) {
-    // Implement cancelAppointment logic
-    console.log(`Cancelling appointment with ID: ${appointmentId}`);
+    
+    const confirmation = confirm('Are you sure you want to cancel this appointment?');
+    if(confirmation){
+    this.appointmentService.doCancelAppointment(appointmentId).subscribe(
+      (response) => {
+        alert(response+"Appointment cancelled successfully");
+        this.router.navigate(['/patient/dashboard']);
+      },
+      err => {console.error('Error cancelling appointment:', err);
+        
+      }
+
+    );
   }
+  }
+
+  
+
+
 }

@@ -10,6 +10,8 @@ import { PatientDashboardComponent } from './modules/patient/dashboard/dashboard
 import { DoctorDashboardComponent } from './modules/doctor/dashboard/dashboard.component';
 import { AppointmentBookingComponent } from './modules/patient/appointment-booking/appointment-booking.component';
 import { HeaderComponent } from './modules/header/header.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppointmentService } from './modules/shared/services/appointment.service';
@@ -27,7 +29,9 @@ import { ConsultationService } from './modules/shared/services/consultation.serv
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [
     AppointmentService,

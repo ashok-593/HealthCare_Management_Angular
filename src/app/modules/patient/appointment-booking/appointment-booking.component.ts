@@ -30,6 +30,7 @@ export class AppointmentBookingComponent implements OnInit {
   availableDates: string[] = [];
   timeSlots: string[] = [];
   patientid: number | null = null;
+  appointmentId: number | any;
 
   constructor(
     private fb: FormBuilder,
@@ -97,6 +98,14 @@ export class AppointmentBookingComponent implements OnInit {
       },
       err => console.error('Error loading time slots:', err)
     );
+  }
+
+  setAppointmentId(id: number) {
+    this.appointmentId = id;
+  }
+
+  getAppointmentId(): number {
+    return this.appointmentId;
   }
 
   onSubmit() {

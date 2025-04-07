@@ -8,13 +8,15 @@ import { PatientDashboardComponent } from './modules/patient/dashboard/dashboard
 import { DoctorDashboardComponent } from './modules/doctor/dashboard/dashboard.component';
 import { AppointmentBookingComponent } from './modules/patient/appointment-booking/appointment-booking.component';
 import { AuthGuard } from './modules/shared/guards/auth.guard';
+import { AppointmentUpdatingComponent } from './modules/patient/appointment-updating/appointment-updating.component';
 
 // Define routes
 const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: 'auth/login', component: LoginComponent },
   { path: 'auth/register', component: RegisterComponent },
-  { path: 'patient/appointments/book', component: AppointmentBookingComponent}
+  { path: 'patient/appointments/book', component: AppointmentBookingComponent},
+  {path: 'patient/appointmets/update', component: AppointmentUpdatingComponent},
   { path: 'patient/dashboard', component: PatientDashboardComponent, canActivate: [AuthGuard] },
   { path: 'doctor/dashboard', component: DoctorDashboardComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'auth/login' }, // Redirect unknown routes

@@ -1,21 +1,40 @@
-<div class="dashboard-container">
-    <h2>Patient Dashboard</h2>
+<div class="card-container">
+  <div class="card" (click)="bookAppointment()">Book Appointment</div>
+  <div class="card" (click)="viewAvailability()">Doctor Availability</div>
+  <div class="card" (click)="viewMedicalHistory()">Medical History</div>
+</div>
 
-    <h3><a class="nav-link" routerLink = "/patient/appointments/book">Book Appointment</a></h3>
-   
-    <h3>Upcoming Appointments</h3>
-    <ul>
-      <li *ngFor="let appointment of upcomingAppointments">
-        <strong>{{ appointment.timeSlot }}</strong> - {{ appointment.status }}
-      </li>
-    </ul>
-   
-    <h3>Recent Consultations</h3>
-    <ul>
-      <li *ngFor="let consultation of recentConsultations">
-        <strong>Doctor:</strong> {{ consultation.doctorName }} -
-        <strong>Notes:</strong> {{ consultation.notes }}
-      </li>
-    </ul>
+<!-- Upcoming Appointments -->
+<h2>Upcoming Appointments</h2>
+<div class="appointments-row">
+  <div class="appointment-card" *ngFor="let appt of upcomingAppointments">
+    <p><strong>Doctor:</strong> {{ appt.doctorName }}</p>
+    <p><strong>Date:</strong> {{ appt.appointmentDate }}</p>
+    <p><strong>Time:</strong> {{ appt.timeSlot }}</p>
+    <button (click)="updateAppointment(appt.appointmentId)">Update</button>
+    <button (click)="cancelAppointment(appt.appointmentId)">Cancel</button>
   </div>
-   
+</div>
+
+<!-- Past Appointments -->
+<h2>Past Appointments</h2>
+<div class="appointments-row">
+  <div class="appointment-card" *ngFor="let appt of pastAppointments">
+    <p><strong>Doctor:</strong> {{ appt.doctorName }}</p>
+    <p><strong>Date:</strong> {{ appt.appointmentDate }}</p>
+    <p><strong>Time:</strong> {{ appt.timeSlot }}</p>
+    <button (click)="viewConsultation(appt.appointmentId)">Consultation</button>
+  </div>
+</div>
+
+<!-- Modal for Consultation Details -->
+<div class="modal-backdrop" *ngIf="showConsultationModal">
+  <div class="modal-content">
+    <h3>Consultation Details</h3>
+    <p><strong>Doctor:</strong> {{ selectedConsultation?.doctorName }}</p>
+    <p><strong>Date:</strong> {{ selectedConsultation?.appointmentDate }}</p>
+    <p><strong>Notes:</strong> {{ selectedConsultation?.notes }}</p>
+    <p><strong>Prescription:</strong> {{ selectedConsultation?.prescription }}</p>
+    <button (click)="closeModal()">Close</button>
+  </div>
+</div>

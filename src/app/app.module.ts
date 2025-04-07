@@ -12,6 +12,8 @@ import { AppointmentBookingComponent } from './modules/patient/appointment-booki
 import { HeaderComponent } from './modules/header/header.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { AppointmentService } from './modules/shared/services/appointment.service';
+import { ConsultationService } from './modules/shared/services/consultation.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,11 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AppointmentService,
+    ConsultationService
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

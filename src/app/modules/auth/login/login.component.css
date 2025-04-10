@@ -9,10 +9,20 @@ body {
     margin: 0;
 }
 
+.entireLoginPage{
+    background-image: url("../../../assets/login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    padding: 100px;
+
+}
+
 .login-container {
-    background-color: #fff;
-    margin-top: 100px;
-    margin-left: 400px;
+    background-color: #c3e9f7;
+    
+    margin-left: 0px;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

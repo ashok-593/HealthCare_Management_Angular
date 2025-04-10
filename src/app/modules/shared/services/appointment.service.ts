@@ -52,6 +52,7 @@ export class AppointmentService {
   doCancelAppointment(appointmentId: number): Observable<any>{
 
     const jwt = localStorage.getItem('access_token');
+    
     console.log("jwt token book appointment method",jwt);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${jwt}`
@@ -64,27 +65,60 @@ export class AppointmentService {
   }
 
  
-  getPastAppointments(patientId: number): Observable<any> {
+  getPastAppointments(userId: number): Observable<any> {
 
     const jwt = localStorage.getItem('access_token');
+    const role=localStorage.getItem('role');
     console.log("jwt token book appointment method",jwt);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${jwt}`
     });
 
     console.log(headers);
-    return this.http.get(`${this.apiUrl}/patient/${patientId}/past`,  { headers });
+    return this.http.get(`${this.apiUrl}/${userId}/past`,  { headers });
+
+
+    
+    
   }
-  getUpcomingAppointments(patientId: number): Observable<any> {
+  getUpcomingAppointments(userId: number): Observable<any> {
 
     const jwt = localStorage.getItem('access_token');
+    const role=localStorage.getItem('role');
     console.log("jwt token book appointment method",jwt);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${jwt}`
     });
 
     console.log(headers);
-    return this.http.get(`${this.apiUrl}/patient/${patientId}/upcoming`, { headers});
+    return this.http.get(`${this.apiUrl}/${userId}/upcoming`, { headers});
+
+    
+    
+  }
+
+  getTodaysAppointments(userId: number): Observable<any> {
+
+    const jwt = localStorage.getItem('access_token');
+    //const role=localStorage.getItem('role');
+    console.log("jwt token book appointment method",jwt);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${jwt}`
+    });
+
+    console.log(headers);
+    return this.http.get(`${this.apiUrl}/${userId}/today`, { headers});
+
+    // console.log(headers);
+    // if(role === 'PATIENT'){
+    //   return this.http.get(`${this.apiUrl}/patient/${userId}/upcoming`, { headers});
+
+    // }
+    // else{
+    //   return this.http.get(`${this.apiUrl}/doctor/${userId}/upcoming`, { headers});
+
+    // }
+    
   }
 
   getAppointment(appointmentId: number): Observable<any>{

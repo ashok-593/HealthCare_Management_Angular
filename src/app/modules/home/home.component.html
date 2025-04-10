@@ -1,0 +1,48 @@
+<div class="home-container">
+    
+    <div class="mainPortion">
+        <div class="scrolling">
+            <marquee behavior="scrolling" direction=""> Welcome to HealthCare Appointment Management System...... !!</marquee>
+        </div>
+        <div class="heading">
+            <h1> HealthCare Appointment Management System</h1>
+
+        </div>
+       
+    </div>
+    
+    <p>
+      Empowering patients and doctors through a streamlined digital platform for scheduling appointments, managing availability, and accessing medical history — all in one place.
+    </p>
+  
+    <section class="highlights">
+      <div class="card">
+        <h2>Book Appointments Easily</h2>
+        <p>Find your preferred doctor, view available time slots, and confirm your appointment in seconds.</p>
+      </div>
+      <div class="card">
+        <h2>Secure Patient Portal</h2>
+        <p>Access your consultation history, prescriptions, and upcoming appointments with full privacy.</p>
+      </div>
+      <div class="card">
+        <h2>Doctor Dashboard</h2>
+        <p>Doctors can manage availability, view appointments, and add consultation records effortlessly.</p>
+      </div>
+    </section>
+  
+   
+<section class="cta">
+    <h3>Ready to get started?</h3>
+    <div *ngIf="!isLoggedIn">
+      <button [routerLink]="['/auth/register']">Register Now</button>
+      <button [routerLink]="['/auth/login']">Login</button>
+    </div>
+    <div *ngIf="isLoggedIn && role === 'PATIENT'">
+      <button [routerLink]="['/patient/dashboard']">Dashboard</button>  
+    </div>
+    <div *ngIf="isLoggedIn && role === 'DOCTOR'">
+      <button [routerLink]="['/doctor/dashboard']">Dashboard</button>  
+    </div>
+  </section>
+  
+  </div>

@@ -1,3 +1,4 @@
+<div class="entireLoginPage">
 <div class="login-container">
     <h2>Login</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -17,4 +18,5 @@
 
     <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
     <p>Don't have an Account? <a class="nav-link" routerLink = "/auth/register">Register</a></p>
+</div>
 </div>

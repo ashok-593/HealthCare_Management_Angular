@@ -1,3 +1,6 @@
+<div class="appointmentBooking">
+ 
+
 <div class="appointment-container">
   <h2>Book an Appointment</h2>
   <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
@@ -28,4 +31,6 @@
 
       <button type="submit" [disabled]="bookingForm.invalid">Book Appointment</button>
   </form>
+</div>
+   
 </div>

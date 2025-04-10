@@ -1,0 +1,46 @@
+.entireAboutPage{
+  background-image: url("../../../assets/dashboard.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 25px;
+}
+
+.about-container {
+    padding: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #84d3e1;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-container h2 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  .about-container p {
+    font-size: 1.1rem;
+    color: #040404;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+  
+  .about-container h3 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .about-container ul {
+    list-style-type: square;
+    margin-left: 20px;
+    font-size: 1.1rem;
+    color: #0c0c0c;
+  }
+  
+  .about-container ul li {
+    margin-bottom: 10px;
+  }

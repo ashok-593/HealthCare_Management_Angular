@@ -1,8 +1,16 @@
+.appointmentBooking{
+    background-image: url("../../../assets/login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 50px;
+}
+
+
 .appointment-container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #86cef1;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

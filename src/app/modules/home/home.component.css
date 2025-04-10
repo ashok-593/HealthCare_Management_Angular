@@ -1,0 +1,93 @@
+.home-container {
+    text-align: center;
+    background-color: rgb(146, 219, 245);
+    padding: 0px;
+    
+    margin: 0 auto;
+  }
+  
+  
+  
+  .home-container p {
+    font-size: 1.2rem;
+    color: #34495e;
+    margin-bottom: 40px;
+  }
+  
+  .highlights {
+    display: flex;
+    gap: 15px;
+    justify-content: space-around;
+    margin-bottom: 40px;
+  }
+  
+  .card {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    gap: 15px;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+  }
+  
+  .card p {
+    font-size: 1rem;
+    color: #7f8c8d;
+  }
+  
+  .cta {
+    margin-top: 50px;
+  }
+  
+  .cta h3 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  .cta button {
+    background-color: #3498db;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+  
+  .cta button:hover {
+    background-color: #2980b9;
+  }
+
+  
+.mainPortion {
+    background-image: url("../../assets/home1.png");
+    background-size: cover; /* This will make the image fit the window */
+    background-repeat: no-repeat;
+    width: 100%; /* Make it responsive */
+    height: 100vh; /* Full viewport height */
+    
+    }
+    
+  .heading{
+    font-size: 2rem;
+    color: #171718;
+    text-align: center;
+    padding-top: 150px;
+    margin-left: 50px;
+
+  }
+
+  .scrolling{
+    color: rgb(12, 12, 12);
+    font-size: 25px;
+    font-weight: 500;
+
+  }

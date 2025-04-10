@@ -1,1 +1,140 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+
+
+
+<div class="card-container">
+    <div class="card"> DOCTOR DASHBOARD</div>
+  
+  </div>
+  
+  <div class="card-container">
+    <div class="card" (click)="manageAvailability()">Manage Availability</div>
+    <div class="card" (click)="viewConsultations()">Consultations List</div>
+    <div class="card" (click)="openPatientInfoModal()">Patient Medical History</div>
+  </div>
+  
+  <!-- Today Appointments -->
+  <h2>Today's Appointments</h2>
+  <div class="appointments-row">
+    <div class="appointment-card" *ngFor="let appt of todaysAppointments">
+      <p><strong>Patient:</strong> {{ appt.patientName }}</p>
+      <p><strong>AppointmentId:</strong> {{ appt.appointmentId }}</p>
+      <p><strong>Appointment Date:</strong> {{ appt.appointmentDate }}</p>
+      <p><strong>Time:</strong> {{ appt.timeSlot }}</p>
+      <button (click)="viewAddConsultation(appt)">Add Consultation</button>
+      
+    </div>
+  </div>
+
+  <!-- Upcoming Appointments -->
+  <h2>Upcoming Appointments</h2>
+  <div class="appointments-row">
+    <div class="appointment-card" *ngFor="let appt of upcomingAppointments">
+      <p><strong>Patient:</strong> {{ appt.patientName }}</p>
+      <p><strong>AppointmentId:</strong> {{ appt.appointmentId }}</p>
+      <p><strong>Appointment Date:</strong> {{ appt.appointmentDate }}</p>
+      <p><strong>Time:</strong> {{ appt.timeSlot }}</p>
+    </div>
+  </div>
+  
+  <!-- Past Appointments -->
+  <h2>Past Appointments</h2>
+  <div class="appointments-row">
+    <div class="appointment-card" *ngFor="let appt of pastAppointments">
+      <p><strong>Patient:</strong> {{ appt.patientName }}</p>
+      <p><strong>AppointmentId:</strong> {{ appt.appointmentId }}</p>
+      <p><strong>Appointment Date:</strong> {{ appt.appointmentDate }}</p>
+      <p><strong>Time:</strong> {{ appt.timeSlot }}</p>
+      <button  *ngIf="appt.appointmentStatus === 'COMPLETED'" (click)="viewConsultation(appt.appointmentId)">Consultation</button>
+      <button  *ngIf="appt.appointmentStatus === 'BOOKED' || appt.appointmentStatus === 'MODIFIED'" (click)="viewAddConsultation(appt)">Add Consultation</button>
+    </div>
+  </div>
+  
+  
+  <!-- Modal for Consultation Details and Medical History -->
+  <div class="modal-backdrop" *ngIf="showConsultationModal || showMedicalHistoryModal">
+    <div class="modal-content">
+      <h3 *ngIf="showConsultationModal">Consultation Details</h3>
+      <h3 *ngIf="showMedicalHistoryModal">Medical History of {{patientInfo.patientName}}</h3>
+      
+      <div *ngIf="showConsultationModal">
+        <p><strong>Patient:</strong> {{ selectedConsultation?.patientName }}</p>
+        <p><strong>Appointment Date:</strong> {{ selectedConsultation?.appointmentDate }}</p>
+        <p><strong>Notes:</strong> {{ selectedConsultation?.notes }}</p>
+        <p><strong>Prescription:</strong> {{ selectedConsultation?.prescription }}</p>
+      </div>
+      
+      <div *ngIf="showMedicalHistoryModal" class="modal-body">
+        <div *ngFor="let consultation of patientConsultations" class="consultation-card">
+          <p><strong>AppointmentId:</strong> {{ consultation.appointmentId }}</p>
+          <p><strong>Doctor:</strong> {{ consultation.doctorName }}</p>
+          <p><strong>Appointment Date:</strong> {{ consultation.appointmentDate }}</p>
+          <p><strong>Notes:</strong> {{ consultation.notes }}</p>
+          <p><strong>Prescription:</strong> {{ consultation.prescription }}</p>
+        </div>
+      </div>
+      
+      <button (click)="closeModal()">Close</button>
+    </div>
+  </div>
+
+
+  <div class="modal-backdrop" *ngIf=" showDoctorConsultationsModal">
+    <div class="modal-content">
+      <h3 *ngIf="showDoctorConsultationsModal">Consultations List</h3>
+      
+      <div *ngIf="showDoctorConsultationsModal" class="modal-body">
+        <div *ngFor="let consultation of consultations" class="consultation-card">
+          <p><strong>AppointmentId:</strong> {{ consultation.appointmentId }}</p>
+          <p><strong>Patient:</strong> {{ consultation.patientName }}</p>
+          <p><strong>Appointment Date:</strong> {{ consultation.appointmentDate }}</p>
+          <p><strong>Notes:</strong> {{ consultation.notes }}</p>
+          <p><strong>Prescription:</strong> {{ consultation.prescription }}</p>
+        </div>
+      </div>
+      
+      <button (click)="closeModal()">Close</button>
+    </div>
+  </div>
+
+
+<!-- Modal for Adding Consultation -->
+<div class="modal-backdrop" *ngIf="showAddConsultationModal">
+    <div class="modal-content">
+      <h3>Add Consultation</h3>
+      <form (ngSubmit)="submitConsultation()">
+        <label for="notes">Notes:</label>
+        <textarea id="notes" [(ngModel)]="consultation.notes" name="notes" required></textarea>
+        
+        <label for="prescription">Prescription:</label>
+        <textarea id="prescription" [(ngModel)]="consultation.prescription" name="prescription" required></textarea>
+        
+        <button type="submit">Submit</button>
+        <button type="button" (click)="closeModal()">Close</button>
+      </form>
+    </div>
+  </div>
+
+  
+<!-- First Modal: Ask for Patient ID and Name -->
+<div class="modal-backdrop" *ngIf="showPatientInfoModal">
+    <div class="modal-content">
+      <h3>Enter Patient Information</h3>
+      <form (ngSubmit)="submitPatientInfo()">
+        <label for="patientId">Patient ID:</label>
+        <input id="patientId" [(ngModel)]="patientInfo.patientId" name="patientId" required>
+        
+        <label for="patientName">Patient Name:</label>
+        <input id="patientName" [(ngModel)]="patientInfo.patientName" name="patientName" required>
+        
+        <button type="submit">Submit</button>
+        <button type="button" (click)="closeModal()">Close</button>
+      </form>
+    </div>
+  </div>
+
+  </div>
+  
+  
+  
+  

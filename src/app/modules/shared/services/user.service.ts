@@ -32,7 +32,7 @@ export class UserService {
       'Authorization': `Bearer ${token}`,
     });
     const options = { headers };
-    const url = `${this.baseUrl}/${userId}`;
+    const url = `${this.baseUrl}/profile`;
     return this.http.get<User>(url, options);
   }
 

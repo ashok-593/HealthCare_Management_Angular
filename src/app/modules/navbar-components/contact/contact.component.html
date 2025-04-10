@@ -1,0 +1,31 @@
+<div class="entireContactPage">
+<div class="contact-container">
+    <h2>Contact Us</h2>
+    <p>
+      We'd love to hear from you. Whether you have a question, feedback, or a partnership inquiry — reach out below!
+    </p>
+  
+    <form (ngSubmit)="submitForm()" >
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" ngModel required placeholder="Enter your name">
+  
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" ngModel required placeholder="Enter your email">
+  
+      <label for="subject">Subject:</label>
+      <input type="text" id="subject" name="subject" ngModel placeholder="Subject of your message">
+  
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" ngModel rows="6" required placeholder="Type your message here..."></textarea>
+  
+      <button type="submit" >Send Message</button>
+    </form>
+  
+    <div class="contact-details">
+      <h3>Need Quick Help?</h3>
+      <p>Email: support&#64;healthcare.com</p>
+      <p>Phone: +91-70132*****</p>
+      <p>Location: Coimbatore, India</p>
+    </div>
+  </div>
+</div>

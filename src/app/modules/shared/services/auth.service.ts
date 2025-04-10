@@ -29,7 +29,7 @@ export class AuthService {
         
         localStorage.setItem('access_token', response.accessToken);
         localStorage.setItem('user_id', response.user.userId);
-
+        localStorage.setItem('role',response.user.role);
         console.log("local Storage token : ",localStorage.getItem('access_token'));
         this.loggedIn.emit(true);
       })
@@ -39,6 +39,8 @@ export class AuthService {
   register(userData: { name: string; email: string;phone: string; password: string; role: string }): Observable<any> {
     return this.http.post(`${apiUrl}/register`, userData);
   }
+
+ 
 
   
 }

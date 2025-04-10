@@ -12,10 +12,16 @@ import { AppointmentBookingComponent } from './modules/patient/appointment-booki
 import { HeaderComponent } from './modules/header/header.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { HomeComponent } from './modules/home/home.component';
+import { ContactComponent } from './modules/navbar-components/contact/contact.component';
+import { AboutComponent } from './modules/navbar-components/about/about.component';
+
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppointmentService } from './modules/shared/services/appointment.service';
 import { ConsultationService } from './modules/shared/services/consultation.service';
+import { AvailabilityComponent } from './modules/doctor/availability/availability.component';
+import { DoctorAvailabilityService } from './modules/shared/services/doctor-availability.service';
 
 @NgModule({
   declarations: [
@@ -24,18 +30,25 @@ import { ConsultationService } from './modules/shared/services/consultation.serv
     RegisterComponent,
     PatientDashboardComponent,
     DoctorDashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    AvailabilityComponent,
+    AboutComponent,
+    ContactComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    HeaderComponent,
+    HomeComponent
   ],
   providers: [
     AppointmentService,
-    ConsultationService
+    ConsultationService,
+    DoctorAvailabilityService
 
   ],
   bootstrap: [AppComponent]

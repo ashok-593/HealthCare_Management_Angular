@@ -1,3 +1,5 @@
+<div class="entireRegisterPage">
+
 <div class="register-container">
     <h2>Register</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -39,3 +41,6 @@
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
     <p>Already have an account? <a routerLink="/auth/login">Login</a></p>
   </div>
+
+    
+</div>

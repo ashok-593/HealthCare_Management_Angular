@@ -5,7 +5,7 @@ import { PatientDashboardComponent } from './modules/patient/dashboard/dashboard
 import { DoctorDashboardComponent } from './modules/doctor/dashboard/dashboard.component';
 import { Component } from '@angular/core';
 import { AppointmentBookingComponent } from './modules/patient/appointment-booking/appointment-booking.component';
-import { ConsultationRecordsComponent } from './modules/patient/consultation-records/consultation-records.component';
+
 import { AppointmentUpdatingComponent } from './modules/patient/appointment-updating/appointment-updating.component';
 import { availableParallelism } from 'node:os';
 import { AvailabilityComponent } from './modules/doctor/availability/availability.component';
@@ -19,7 +19,6 @@ export const routes: Routes = [
       { path: 'auth/register', component: RegisterComponent },
       {path: 'patient/appointments/book', component: AppointmentBookingComponent},
       {path: 'patient/appointments/update', component: AppointmentUpdatingComponent},
-      {path: 'patient/consultations', component: ConsultationRecordsComponent},
       { path: 'patient/dashboard',component: PatientDashboardComponent},
       { path: 'doctor/dashboard',component:DoctorDashboardComponent },
       { path: 'doctor/availability', component: AvailabilityComponent},

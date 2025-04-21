@@ -2,6 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { text } from 'node:stream/consumers';
 
 const apiUrl = 'http://localhost:8082/api/users';
 
@@ -37,7 +38,7 @@ export class AuthService {
   }
 
   register(userData: { name: string; email: string;phone: string; password: string; role: string }): Observable<any> {
-    return this.http.post(`${apiUrl}/register`, userData);
+    return this.http.post(`${apiUrl}/register`, userData, {responseType: 'text'});
   }
 
  

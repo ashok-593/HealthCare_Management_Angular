@@ -43,7 +43,8 @@ export class RegisterComponent implements OnInit{
           console.log(data);
           this.isSuccessfull=true;
           this.isSignUpFailed = false;
-          this.router.navigate(['auth/login']);
+          alert("successfully registered .... continue with login!!")
+          this.router.navigate(['/auth/login']);
         },
         err=>{
           this.errorMessage= err.error.message;

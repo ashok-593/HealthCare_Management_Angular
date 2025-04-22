@@ -54,10 +54,12 @@ goToDashboard(){
 }
 
 blockAvailabilityModal(){
+  this.showBlockAvailabilityModal=false;
   this.showBlockConformition=true;
 }
 
 unBlockAvailabilityModal(){
+  this.showUnBlockedModal=false;
   this.showUnBlockConformition=true;
 }
 

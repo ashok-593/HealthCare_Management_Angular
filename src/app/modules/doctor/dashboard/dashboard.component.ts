@@ -200,7 +200,8 @@ submitConsultation() {
 submitPatientInfo() {
       // Close the first modal
       this.showPatientInfoModal = false;
-  
+    console.log(this.patientInfo.patientName);
+
       // Fetch patient consultations
       this.consultationService.getConsultations(+this.patientInfo.patientId).subscribe(response => {
         this.patientConsultations = response;

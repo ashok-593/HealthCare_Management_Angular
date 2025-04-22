@@ -20,6 +20,8 @@ export class AvailabilityComponent {
 
 showUnBlockedModal=false;
 showBlockAvailabilityModal = false;
+showBlockConformition=false;
+showUnBlockConformition=false;
   selectedDate: string | null=null;
   availableDates: string[] = []; // Populate this with available dates
   doctorid: number | null=null;
@@ -49,6 +51,14 @@ ngOnInit() {
 
 goToDashboard(){
   this.router.navigate(['doctor/dashboard']);
+}
+
+blockAvailabilityModal(){
+  this.showBlockConformition=true;
+}
+
+unBlockAvailabilityModal(){
+  this.showUnBlockConformition=true;
 }
 
 
@@ -85,6 +95,9 @@ goToDashboard(){
   closeModal() {
     this.showBlockAvailabilityModal = false;
     this.showUnBlockedModal=false;
+    this.showBlockConformition=false;
+    this.showUnBlockConformition=false;
+
   }
 
   loadAvailableDates() {
@@ -124,8 +137,8 @@ else{
   blockAvailability() {
   const doctorId = this.doctorid;
   const date = this.selectedDate;
-  const confirmation = confirm('Are you sure you want to Block this date?');
-  if(doctorId !=null && date!=null && confirmation){
+  // const confirmation = confirm('Are you sure you want to Block this date?');
+  if(doctorId !=null && date!=null ){
     this.availabilityService.blockDate(doctorId,date).subscribe(response => {
             // Handle the response, e.g., update the UI
             console.log('Date blocked:' +  response);
@@ -145,8 +158,8 @@ else{
 unBlockAvailability() {
      const doctorId = this.doctorid;
   const date = this.selectedDate;
-  const confirmation = confirm('Are you sure you want to unBlock that Date?');
-  if(doctorId !=null && date!=null && confirmation){
+  // const confirmation = confirm('Are you sure you want to unBlock that Date?');
+  if(doctorId !=null && date!=null ){
     this.availabilityService.unBlockDate(doctorId,date).subscribe(response => {
             // Handle the response, e.g., update the UI
             console.log('Date Unblocked:'+ response);

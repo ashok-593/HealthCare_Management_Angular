@@ -15,13 +15,13 @@
   <div class="modal-backdrop" *ngIf="showBlockAvailabilityModal">
     <div class="modal-content">
       <h3>Block Availability</h3>
-      <form (ngSubmit)="blockAvailability()">
+      <form >
         <label for="blockDate">Select Date:</label>
         <select id="blockDate" [(ngModel)]="selectedDate" name="blockDate" required>
           <option *ngFor="let date of availableDates" [value]="date">{{ date }}</option>
         </select>
         
-        <button type="submit">Block</button>
+        <button type="submit" (click)="blockAvailabilityModal()">Block</button>
         <button type="button" (click)="closeModal()">Close</button>
       </form>
     </div>
@@ -31,14 +31,38 @@
   <div class="modal-backdrop" *ngIf="showUnBlockedModal">
     <div class="modal-content">
       <h3>UnBlock Availability</h3>
-      <form (ngSubmit)="unBlockAvailability()">
+      <form >
         <label for="blockDate">Select Date:</label>
         <select id="blockedDate" [(ngModel)]="selectedDate" name="blockedDate" required>
           <option *ngFor="let date of blockedDates" [value]="date">{{ date }}</option>
         </select>
         
-        <button type="submit">UnBlock</button>
+        <button type="submit"  (click)="unBlockAvailabilityModal()">UnBlock</button>
         <button type="button" (click)="closeModal()">Close</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="showBlockConformition">
+    <div class="modal-content">
+      <h4>Are you sure to block Availability</h4>
+      <form (ngSubmit)="blockAvailability()">
+        
+        
+        <button type="submit">Yes</button>
+        <button type="button" (click)="closeModal()">No</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="showUnBlockConformition">
+    <div class="modal-content">
+      <h4>Are you sure to Unblock Availability</h4>
+      <form (ngSubmit)="unBlockAvailability()">
+        
+        
+        <button type="submit">Yes</button>
+        <button type="button" (click)="closeModal()">No</button>
       </form>
     </div>
   </div>
